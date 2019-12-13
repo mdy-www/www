@@ -83,4 +83,5 @@ function func() {
     }
   }
   func() // 不报错
-  //ES6声明变量有多种方式
+  //ES6声明变量有多种方式 var function let const import class
+  var $iterator=
