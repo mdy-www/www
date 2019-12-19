@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>obj</title>
+ </head>
+ <body>
+    
+  <script>
+
+                                                        //以前的写法   
+
+// ES5 比较两个值是否相等，只有两个运算符：相等运算符（==）和严格相等运算符（===）。
+//它们都有缺点，前者会自动转换数据类型，后者的NaN不等于自身，以及+0等于-0。
+
+                                                        //为何修改？
+
+//JavaScript 缺乏一种运算，在所有环境中，只要两个值是一样的，它们就应该相等。
+
+                                                        //怎么改的？
+
+// ES6 提出“Same-value equality”（同值相等）算法，用来解决这个问题。Object.is就是部署这个算法的新方法。
+
+//它用来比较两个值是否严格相等，与严格比较运算符（===）的行为基本一致。
+Object.is("foo","foo")
+//true
+Object.is({},{})
+//false
+//不同之处只有两个一是+0不等于-0，二是NaN等于自身
+//ES5
++0===-0//true
+NaN===NaN//false
+//ES6
+Object.is(+0,-0) //flase
+Object.is(NaN,NaN)//true
+
+                                                        //如何转换的或部署的   
+
+//get&&set
+//使用lang属性来获取language属性
+console.log("get&&set")
+var person={
+    firstName:"Bill",
+    lastName:"Gates",
+    get_language:"get_en",
+    set_language:"",
+    fun_test:"acquisition",
+    fun_test1:"",
+    //函数调用的
+    //function acquisition
+    fun_acquisition:function(){
+      return this.fun_test;  
+    },
+    //function amend
+    fun_amend:function(){
+        return this.fun_test1=this.fun_amendvalue;
+    },
+
+    //get&&set
+    //get获取
+    get get_lang(){
+        return this.get_language;
+    },
+    //set设置
+    set set_lang(set_lang){
+        return this.set_language=set_lang;
+    }
+
+}
+person.set_lang="set_en"
+person.fun_amendvalue="fun_amend"
+
+console.log(person.get_lang); //get_en
+console.log(person.set_language);//set_en
+console.log(person.fun_acquisition());//acquisition
+console.log(person.fun_amend());//fun_amend
+                                                                    //bject.defineProperty()的理解
+        //Object.defineproperty(obj,prop,descriptor)
+
+        //obj要在其上定义属性的对象
+        //prop要定义或修改的属性的名称
+        //descriptor被定义或修改的属性描述符
+          var obj={}
+          Object.defineProperty(obj,"a",{
+              value:27,
+          })      
+          console.log(obj.a)
+          //writable
+          //是否可以被重写：默认值为true 当属性值为false时，修改无效
+          var obj={}
+          Object.defineProperty(obj,"a",{
+              value:27,
+              writable:false
+          })      
+          console.log('原值'+obj.a)
+          obj.a=20
+          console.log('无法修改'+obj.a)
+          //configurable 可配置的属性，对象的属性是否可以被删除，以及除value和writable特性外的其他特性是否可以被修改
+          
+          //enumberable 是否可以被枚举，for in 或者 Object.keys()
+          //set 和 get 属性 默认为undefined
+          // 直接声明和用Object.defineProperty()的区别
+        //   let obj = {
+        //     a: 12  // 其他的属性都为true
+        //     }
+        //     Object.defineProperty(obj, 'b', {
+        //     value: 15 //其他的属性都为false
+        //     })
+            
+            //实现简易的双向绑定：
+           //使用箭头函数等加载完html文档后再执行脚本函数
+            window.onload=()=>{
+           //声明常量obj直接量对象
+           const obj={};
+           //使用对象的object.defineproperty()并使用get/set
+           Object.defineProperty(obj,'text',{
+           //get用来获取返回对象的属性
+            get() {
+                 return text    
+            },
+           //set用来设置dom元素的值为统一的值
+           set(newval){
+                document.getElementById("ipt").value=newval;
+                document.getElementById("txt").innerHTML=newval;
+           }
+        })
+           //获取input元素
+            let input=document.getElementById('ipt')
+           //设置监听函数addEventListener实现双向数据绑定
+           input.addEventListener('keyup',(e)=>{
+               obj.text=e.target.value;
+           })
+        }
+        
+  </script>
+   <input type="text" name='' value='' id='ipt'>
+   您输入的值是<span id='txt'></span>
+ </body>
+</html>
