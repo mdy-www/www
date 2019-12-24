@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+ </head>
+ <body>
+    <!-- 说到前端框架就不得不说框架的设计模式，也就说它到底是怎么写的 -->
+    <!-- 先简单的说一下这个框架的历史吧 有这么几个阶段-->
+
+    <!-- 第一阶段 javascript操作DOM节点，使用浏览器提供的原生的API-->
+    <p id=name></p>
+    <!-- 第二阶段，由于原生API不好用，还要考虑浏览器兼容性，jQuery横空出世，以简洁的API迅速俘获了前端开发者的芳心： -->
+   
+    <script>
+        //原生javascript
+
+        var dom=document.getElementById("name");
+        dom.innerHTML='yuansheng';
+        dom.style.color='red';
+        //jq
+
+        //$('#name').text('Homer').css('color', 'red');
+        
+
+        //object.create()用法
+        //Object.create()方法是ECMAScript 5中新增的方法，这个方法用于创建一个新对象。被创建的对象继承另一个对象的原型，在创建新对象时可以指定一些属性。
+
+        //基类
+        function site(){
+         this.name='site';
+         this.domain='domain';
+        }
+        site.prototype.create=function(name,domain){
+            this.name=name;
+            this.domain=domain;
+        }
+        //子类
+        function itbilu(){
+            site.call(this);//调用基类的构造函数
+        }
+    //讲了一个生活的例子，我们用代码的方式更加深入了解MVC。
+
+    //MVC 中M表示Model,与数据操作和行为相关的逻辑都应该放入模型中，所有的数据都应放在这命名空间中
+        var Model={
+            create:function(){
+                //创建对象
+                this.records={}
+                //创建对象并使原型上records
+                var object=object.create(this)
+                //
+                object.prototype=object.create(this.prototype)
+                return object
+            }
+        }
+    //create用于创建一个以Model为原型的对象，然后就是一些包括数据操作的一些函数包括查找，存储
+        var Model={
+            find:function(){
+                return this.records[this.id]
+            },
+            save:function(){
+                this.records[thid.id]=this
+            }
+        }
+     console.log(Model)
+    </script>
+ </body>
+</html>
