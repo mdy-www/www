@@ -106,7 +106,7 @@ function (){
     return 5
 }
 var sum=(num1,num2)=>num1+num2
-function sun(num1,num2){
+function sun(num1,num2){  
     return num1+num2
 }
 //如果箭头函数的代码块部分多于一条语句，就要使用大括号将它们括起来

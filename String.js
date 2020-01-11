@@ -85,6 +85,7 @@ function fn(){
 
 
 //模板编译
+//上面代码在模板字符串之中，放置了一个常规模板。该模板使用<%...%>放置 JavaScript 代码，使用<%= ... %>输出 JavaScript 表达式。
 //先感受一下
 let template=`
 <ul>
