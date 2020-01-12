@@ -1,3 +1,10 @@
+                                            //ES5
+//对象的 创建  
+var obj={};
+//添加一个 普通属性
+var obj={a:0};//继承了全局对象的toString()方法a自动转换为了字符串
+
+                                            //ES6
 //对象（object）是 JavaScript 最重要的数据结构。ES6 对它进行了重大升级，本章介绍数据结构本身的改变，
 //变量
 const foo='bar';
